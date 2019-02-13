@@ -1,0 +1,66 @@
+<!--
+* @Author: 凛冬
+* @Date:   2019-02-12
+* @Last Modified by:   凛冬
+* @Last Modified time: 2019-02-12
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>社工查询系统</title>
+	<meta charset="utf-8">
+	<!--引入element2.4.6样式-->
+	<link rel="stylesheet" href="library/css/element.css">
+	<!--引入vue2.5.17框架-->
+	<script src="library/js/vue.js"></script>
+	<!--引入element2.4.6组件-->
+	<script src="library/js/element.js"></script>
+</head>
+<body>
+<div>
+<div id="header">
+<el-menu
+  :default-active="activeIndex2"
+  class="el-menu-demo"
+  mode="horizontal"
+  @select="handleSelect"
+  background-color="#545c64"
+  text-color="#fff"
+  active-text-color="#ffd04b">
+  <el-menu-item index="1">处理中心</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">我的工作台</template>
+    <el-menu-item index="2-1">选项1</el-menu-item>
+    <el-menu-item index="2-2">选项2</el-menu-item>
+    <el-menu-item index="2-3">选项3</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+</el-menu>
+</div>
+</div>
+</body>
+<script>
+var Main = {
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#header')
+</script>
+</html>
