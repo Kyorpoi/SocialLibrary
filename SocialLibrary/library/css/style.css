@@ -1,0 +1,29 @@
+/*
+* @Author: 凛冬
+* @Date:   2019-02-14
+* @Last Modified by:   凛冬
+* @Last Modified time: 2019-02-14
+*/
+html{
+	min-width: 740px;
+}
+#Header{
+	height: 61px;
+}
+#Search{
+	width: 740px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+#Result{
+	width: 740px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+a{
+	text-decoration:none;
+}

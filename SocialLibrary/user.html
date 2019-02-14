@@ -22,7 +22,7 @@
 <div>
   <div id="Header">
     <el-menu
-      default-active="2"
+      default-active="4"
       mode="horizontal"
       background-color="#545c64"
       text-color="#fff"
@@ -34,11 +34,12 @@
       <el-menu-item index="5"><a href="#">QQ群关系查询</a></el-menu-item>
       <el-menu-item index="6"><a href="#">其他数据查询</a></el-menu-item>
     </el-menu>
+    </el-menu>
   </div>
   <div id="Search">
-    <el-form ref="form" :model="form" label-width="80px">
-    <el-form-item label="待查密码">
-      <el-input v-model="form.pwd" placeholder="请输入要查询的密码"></el-input>
+    <el-form ref="form" :model="form" label-width="90px">
+    <el-form-item label="待查用户名">
+      <el-input v-model="form.pwd" placeholder="请输入要查询的用户名"></el-input>
     </el-form-item>
     <el-form-item label="数据库">
       <el-select v-model="form.dbs" placeholder="请选择要使用的数据库">
@@ -57,9 +58,9 @@
   <div id="Result">
     <template>
       <el-table :data="tableData3" height="580" border style="width: 100%">
-        <el-table-column prop="mail" label="邮箱" width="180">
+      <el-table-column prop="name" label="用户名" width="180">
         </el-table-column>
-        <el-table-column prop="name" label="用户名" width="180">
+        <el-table-column prop="mail" label="邮箱" width="180">
         </el-table-column>
         <el-table-column prop="password" label="密码">
         </el-table-column>
@@ -72,7 +73,7 @@
 var Header = {
     data() {
       return {
-        activeIndex: '1',
+        activeIndex: '3',
       };
     },
     methods: {
