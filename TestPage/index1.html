@@ -1,4 +1,5 @@
 <html>
+    <meta charset="utf-8">
 <head>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
 </head>
@@ -6,19 +7,19 @@
 <body>
     <div id="app">
         <div v-if="type>='90'">
-        优秀<p>{{ type }}</p>
+        优秀，分数是{{ parseInt(type) }}
         </div>
         <div v-else-if="type<90&type>=80">
-        良<p>{{ type }}</p>
+        良，分数是{{ parseInt(type) }}
         </div>
         <div v-else-if="type<80&type>=70">
-        中等<p>{{ type }}</p>
+        中等，分数是{{ parseInt(type) }}
         </div>
         <div v-else-if="type<70&type>=60">
-        及格<p>{{ type }}</p>
+        及格，分数是{{ parseInt(type) }}
         </div>
         <div v-else-if="type<60" >
-        不及格<p>{{ type }}</p>
+        不及格，分数是{{ parseInt(type) }}
         </div>
     </div>
 </body>
