@@ -1,6 +1,8 @@
 # SocialLibrary
 自建社工库，前端vue+element，后端php，数据库考虑mysql，有空再弄个可视化监控<br>
 
+4.11 最近计划：数据库暂且搁置，查询时多核工作未完成，准备写后端<br>
+4.11 优化了配置文件和表结构，110w条数据查询时间10秒左右、姑且先这样<br>
 4.10 136W数据 SELECT Username,Password FROM "94im","106w","Acfun" where Password like '123%'; 查了2000+秒没查出来，看看怎么优化把<br>
 4.9整理了四个库的数据<br>
 4.1构思了一下后端，准备开始建模<br>
