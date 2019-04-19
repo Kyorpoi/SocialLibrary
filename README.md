@@ -1,5 +1,5 @@
 # SocialLibrary
-自建社工库，前端vue+element，后端php，数据库考虑mysql，有空再弄个可视化监控<br>
+自建社工库，前端vue+element，后端php，数据库考虑mysql(实际用postgresql实现了），有空再弄个可视化监控<br>
 
 4.19 经过不懈努力，决定放弃jsp、困难过多，考虑使用php进行后端开发<br>
 4.11 最近计划：数据库暂且搁置，查询时多核工作未完成，准备写后端<br>
