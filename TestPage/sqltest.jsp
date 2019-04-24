@@ -1,26 +1,25 @@
-﻿<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
-<%@page import="java.sql.*" %>
+<%@ page language="java" contentType="text/html;charset=utf-8" import="java.io.*" import="java.util.*" import="java.sql.*"%>
 <html>
     <head>
         <title>dbjsp.jsp</title>
     </head>
     <body>
 <%
-String jdbcDriverName="org.postgresql.Driver";
-Driver driver = (Driver) Class.forName(jdbcDriverName).newInstance();
-DriverManager.registerDriver(driver);
-Connection dbcon = DriverManager.getConnection("jdbc:postgresql://192.168.25.128/Data","postgres","851e28c69d050650");
-Statement st = dbcon.createStatement();
-ResultSet rt = st.executeQuery("SELECT "Username","Password" FROM 94im WHERE "Password" like '123%'");
-while(rt.next())
-{
-String test1=rt.getString(1);
-out.println("<p>"+ test1 );
-
-}
-rt.close();
-st.close();
-dbcon.close();
+Class.forName("org.postgresql.Driver").newInstance();
+String url="jdbc:postgresql://localhost/xxxxxx";
+String user="xxxxxx";
+String password="xxxxxx";
+Connection conn=DriverManager.getConnection(url,user,password);
+Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+String sql="select * from cities";
+ResultSet rs=stmt.executeQuery(sql);
+while(rs.next()){
 %>
+您的第一个字段内容为：<%=rs.getString(1)%>
+<%
+}
+%>
+<%out.print("数据库操作成功，恭喜您");%>
+<%rs.close();stmt.close();conn.close();%>
 </body>
 </html>
