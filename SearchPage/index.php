@@ -1,34 +1,39 @@
 <?php
    require 'config.php';
+   $SColName = '"Username","Password"';
+   $TableName = '"94im"';
+   $CColName = '"Password"';
+   $Value = "'123%'";
+   $Page = "1";
+   //echo"$ColName";
+
    $sql =<<<EOF
    SELECT DISTINCT
-      "Username",
-      "Password" 
+      {$SColName} 
    FROM
-      "94im" 
+      {$TableName} 
    WHERE
-      "Password" LIKE'123%' 
+      {$CColName} LIKE {$Value} 
    UNION SELECT
       "Username",
       "Password" 
    FROM
       "106w" 
    WHERE
-      "Password" LIKE'103%' 
-      LIMIT 10 OFFSET 0;
+      "Password" LIKE'103%'
 EOF;
-
    $ret = pg_query($db, $sql);
-   if(!$ret){
+   if(!$ret || $ret1){
       echo pg_last_error($db);
       exit;
    } 
+   $Count = pg_affected_rows($ret);
    echo"<table style='border-color: #efefef;' border='1px' cellpadding='5px' cellspacing='0px'><tr>";
    while($row = pg_fetch_row($ret)){
       echo "<td>username = ". $row[0] . "</td>";
       echo "<td>password = ". $row[1] . "</td>";
       echo '<tr>';
 }
-   echo "Operation done successfully";
+  // echo "一共有{$Count}行";
    pg_close($db);
 ?>
