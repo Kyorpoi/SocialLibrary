@@ -1,6 +1,7 @@
 # SocialLibrary
 自建社工库，前端vue+element，后端php，数据库考虑mysql(实际用postgresql实现了），有空再弄个可视化监控（考虑现成的）<br>
 
+4.30 想了两天我为什么要做跨域、、、先架上前端看看orz<br>
 4.28 尝试了vue-resource和jQuery的ajax，看了下大概都能用、被跨域卡了半天，不过基本上打通了<br>
 4.25 完成中期报告<br>
 4.24 优化了查询语句，优化了表结构，优化索引，准备后端建模<br>
