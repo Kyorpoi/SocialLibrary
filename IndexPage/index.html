@@ -1,54 +1,74 @@
+<!--
+* @Author: 凛冬
+* @mail:   2019-02-12
+* @Last Modified by:   凛冬
+* @Last Modified time: 2019-02-14
+-->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="IndexPage">
-    <meta name="keywords" content="SocialLibrary">
-    <meta name="author" content="凛ドン">
-    <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="icon" href="./img/favicon.ico">
+	<title>泄露数据查询系统</title>
+	<meta charset="utf-8">
+	<!--引入element2.4.6样式-->
+	<link rel="stylesheet" href="css/element.css">
+	<!--引入vue2.5.17框架-->
+	<script src="js/vue.js"></script>
+	<!--引入element2.4.6组件-->
+  <script src="js/element.js"></script>
+  <script src="js/vue-resource.min.js"></script>
+    <!--用jQuery进行ajax操作-->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <header id="panel" class="panel-cover">
-        <div class="panel-main">
-            <div class="panel-main__inner panel-inverted">
-                <div class="panel-main__content">
-                    <div class="profilepic">
-                        <img src="./img/logo.jpg" width="80" class="js-avatar iUp show" />
-                    </div>
-                    <h1 class="panel-cover__title panel-title iUp"><strong>SocialLibrary</strong></h1>
-                    <p class="panel-cover__subtitle panel-subtitle iUp"><strong>数据的价值</strong></p>
-                    <hr class="panel-cover__divider iUp" />
-
-                    <p id="description" class="panel-cover__description iUp"><strong>花びら空高く飛ばす舞風が,旅立ちの時を知らせている,駆け巡る あなたとの歳月が,「さあ行きなさい」と手を振るから,僕は ひとり 行くよ
-                    </strong><br/>
-                    <p id="description" class="panel-cover__description iUp"><strong>轻风将花瓣吹往高空,似乎是告知我已至旅程之时,永记与你共同的岁月,挥手道着「一路顺风」,此后的我将独自前行</strong></p>
-                    </p>
-
-                    <div class="navigation-wrapper iUp">
-                        <div>
-                            <nav class="cover-navigation cover-navigation--primary">
-                                <ul class="navigation">
-                                    <li class="navigation__item">
-                                        <a href="../SocialLibrary/index.html" class="blog-button">首页</a>
-                                    </li>
-                                    <li class="navigation__item">
-                                        <a href="#" class="blog-button">博客</a>
-                                    </li>
-                                    <li class="navigation__item">
-                                        <a href="https://github.com/Kyorpoi" class="blog-button">Github</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-    </header>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
+<div>
+  <div id="Header">
+    <el-menu
+      default-active="2"
+      mode="horizontal"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      <el-menu-item index="1" disabled>泄露数据查询系统</el-menu-item>
+      <el-menu-item index="2"><a href="index.html">密码查询</a></el-menu-item>
+      <el-menu-item index="3"><a href="email.html">邮箱查询</a></el-menu-item>
+      <el-menu-item index="4"><a href="user.html">用户名查询</a></el-menu-item>
+      <el-menu-item index="5"><a href="#">QQ群关系查询</a></el-menu-item>
+      <el-menu-item index="6"><a href="#">其他数据查询</a></el-menu-item>
+    </el-menu>
+  </div>
+  <div id="Search">
+    <el-form ref="form" :model="form" label-width="80px">
+    <el-form-item label="待查密码">
+      <el-input v-model="form.pwd" placeholder="请输入要查询的密码"></el-input>
+    </el-form-item>
+    <el-form-item label="数据库">
+      <el-select v-model="form.dbs" placeholder="请选择要使用的数据库">
+        <el-option label="Acfun" value="acfun"></el-option>
+        <el-option label="Dropbox" value="dropbox"></el-option>
+        <el-option label="全部" value="all"></el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="Submit">精确查询</el-button>
+      <el-button type="primary" @click="Submit">模糊查询</el-button>
+      <el-button type="primary">重置</el-button>
+    </el-form-item>
+  </el-form>
+  </div>
+  <div id="Result">
+    <template>
+      <el-table :data="tableData3" height="580" border style="width: 100%">
+        <el-table-column prop="mail" label="邮箱" width="180">
+        </el-table-column>
+        <el-table-column prop="name" label="用户名" width="180">
+        </el-table-column>
+        <el-table-column prop="password" label="密码">
+        </el-table-column>
+      </el-table>
+    </template>
+  </div>
+</div>
 </body>
+<script src="js/index.js"></script>
 </html>
