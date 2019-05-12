@@ -1,4 +1,5 @@
-<?
+<?php
+    use Medoo\Medoo;
     $database = new Medoo([
         'database_type' => 'pgsql',
         'database_name' => 'Data',

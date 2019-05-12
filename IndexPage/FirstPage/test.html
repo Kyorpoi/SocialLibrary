@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ajax测试</title>
+<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+<div id="box">
+    name:<input type = "text" v-model = "name">
+    <br>
+    url:<input type = "text" v-model = "url">
+    <br>
+    value:<input type = "text" v-model = "value">
+    <br>
+    <input type="button" @click="post(name,url,value)" value="Submit">
+</div>
+<script type = "text/javascript">
+window.onload = function(){
+	var vm = new Vue({
+	    el:'#box',
+	    data:{
+            name:'',
+            url:'',
+            value:'',
+        },
+        watch : {
+            name:function(val) {
+                this.name = val;
+            },
+            url:function (val) {
+                this.url = val;
+            },
+            value:function (val) {
+                this.value = val;
+            }
+        }  ,
+	    methods:{
+	        post:function(name,url,value){
+	            //发送 post 请求
+	            this.$http.post('http://192.168.23.128/test.php',{
+                    name:name,url:url,value:value
+                },{emulateJSON:true}).then(function(res){
+                    document.write(res.body);    
+                },function(res){
+                    console.log(res.status);
+                });
+	        }
+	    }
+	});
+}
+</script>
+</body>
+</html>

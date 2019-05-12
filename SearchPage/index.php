@@ -1,11 +1,10 @@
 <?php
-   require 'config.php';
+//本页为手撸记录备份
    $SColName = '"Username","Password"';
    $TableName = '"94im"';
    $CColName = '"Password"';
    $Value = "'123%'";
    $Page = "1";
-   //echo"$ColName";
 
    $sql =<<<EOF
    SELECT DISTINCT
@@ -23,7 +22,11 @@
       "Password" LIKE'103%'
 EOF;
    $ret = pg_query($db, $sql);
-   if(!$ret || $ret1){
+   if($ret == null)
+   {
+      echo 'null';
+   }
+   if(!$ret){
       echo pg_last_error($db);
       exit;
    } 
@@ -34,6 +37,6 @@ EOF;
       echo "<td>password = ". $row[1] . "</td>";
       echo '<tr>';
 }
-  // echo "一共有{$Count}行";
+   echo "一共有{$Count}行";
    pg_close($db);
 ?>
