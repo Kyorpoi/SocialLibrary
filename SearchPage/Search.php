@@ -1,4 +1,8 @@
 <?php
+header('content-type:application:json;charset=utf8');
+header('Access-Control-Allow-Origin:*');
+header('Access-Control-Allow-Methods:POST');
+header('Access-Control-Allow-Headers:x-requested-with,content-type');
 //本页为调用medoo
     require 'Medoo.php';
     //include 'config.php'
@@ -12,21 +16,18 @@
     ]);
 
 
-    $SColName = 'UsernamePassword';
-    $SCloName1 = 'Password';
-    $TableName = '106w';
-    $CColName = '"Password[~]"';
-    $Value = 123;
-    $Page = "1";
-    echo $SColName;
-    echo "<br>";
+    $SColName = isset($_POST['SColName']) ? htmlspecialchars($_POST['SColName']) : '';
+    $TableName =  isset($_POST['TableName']) ? htmlspecialchars($_POST['TableName']) : '';
+    $CColName = isset($_POST['CColName']) ? htmlspecialchars($_POST['CColName']) : '';
+    $Value =  isset($_POST['Value']) ? htmlspecialchars($_POST['Value']) : '';
 
-    $result = $database -> debug() -> select($TableName,[
-        $SColName
+    $SColName=array("Username","Password");
+    
+    $result = $database -> select($TableName,[
+        $SColName[0],$SColName[1]
     ],[
         $CColName => "$Value"
     ]);
-    echo "<br>";
 /*
     $result = $database -> debug() -> select("106w", [
         "Username",
@@ -38,6 +39,5 @@
     print_r($result);
     //var_dump( $database->log() );
     //print_r($database->info());  
-    echo "<br>";
-    echo array_keys($result);
+
 ?>

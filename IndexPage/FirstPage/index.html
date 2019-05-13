@@ -16,8 +16,6 @@
 	<!--引入element2.4.6组件-->
   <script src="js/element.js"></script>
   <script src="js/vue-resource.min.js"></script>
-    <!--用jQuery进行ajax操作-->
-  <script src="js/jquery-1.11.3.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -43,15 +41,20 @@
       <el-input v-model="form.pwd" placeholder="请输入要查询的密码"></el-input>
     </el-form-item>
     <el-form-item label="数据库">
-      <el-select v-model="form.dbs" placeholder="请选择要使用的数据库">
-        <el-option label="Acfun" value="acfun"></el-option>
-        <el-option label="Dropbox" value="dropbox"></el-option>
-        <el-option label="全部" value="all"></el-option>
+    <template>
+      <el-select v-model="form.value" placeholder="请选择">
+        <el-option
+          v-for="item in form.dbs"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
       </el-select>
+    </template>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="Submit">精确查询</el-button>
-      <el-button type="primary" @click="Submit">模糊查询</el-button>
+      <el-button type="primary" @click="Submit()">精确查询</el-button>
+      <el-button type="primary" @click="Submit1()">模糊查询</el-button>
       <el-button type="primary">重置</el-button>
     </el-form-item>
   </el-form>

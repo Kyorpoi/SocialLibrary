@@ -10,6 +10,7 @@ $value = isset($_POST['value']) ? htmlspecialchars($_POST['value']) : '';
 $value = $value + 122221;
 
 $data = array();
-$data[0] = array('id' => $name, 'url' => $url, 'value' => $value);
-echo json_encode($data);
+$data[0] = array("111" => $name, "222" => $url, "333" => $value);
+$json = array("data" => $data);
+echo json_encode($json);
 ?>

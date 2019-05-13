@@ -47,7 +47,7 @@
                 name:name,url:url,value:value
             },{emulateJSON:true}).then(function(res){
                 this.c = res.data;
-                alert(res.data);
+                //alert(typeof(this.c));
             },function(res){
                 console.log(res.status);
             });
