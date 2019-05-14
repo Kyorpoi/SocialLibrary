@@ -36,7 +36,7 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
         "Password[~]" => 123
     ]);
 */
-    print_r($result);
+print_r(json_encode($result));
     //var_dump( $database->log() );
     //print_r($database->info());  
 

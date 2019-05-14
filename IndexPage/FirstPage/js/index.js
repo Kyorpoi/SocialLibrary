@@ -81,7 +81,7 @@ var Search = {
           CColName:'Password[~]'
         },{emulateJSON:true}).then(function(res){
             this.form.c = res.data;
-            alert(typeof(this.form.c));
+            console.dir(this.form.c.Username);
             //alert(res.data);
         },function(res){
             //console.log(res.status);
