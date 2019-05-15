@@ -16,6 +16,7 @@
 	<!--引入element2.4.6组件-->
   <script src="js/element.js"></script>
   <script src="js/vue-resource.min.js"></script>
+  <script src="js/md5.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -55,22 +56,27 @@
     <el-form-item>
       <el-button type="primary" @click="Submit()">精确查询</el-button>
       <el-button type="primary" @click="Submit1()">模糊查询</el-button>
-      <el-button type="primary">重置</el-button>
+      <el-button type="primary" @click="doReset">重置</el-button>
+      <el-button type="primary" @click="md5Encode()">md5加密</el-button>
     </el-form-item>
   </el-form>
-  </div>
-  <div id="Result">
     <template>
-      <el-table :data="tableData3" height="580" border style="width: 100%">
-        <el-table-column prop="mail" label="邮箱" width="180">
-        </el-table-column>
-        <el-table-column prop="name" label="用户名" width="180">
-        </el-table-column>
-        <el-table-column prop="password" label="密码">
-        </el-table-column>
+      <el-table 
+        :data="form.resultData" 
+        height="580" 
+        border 
+        style="width: 100%">
+          <el-table-column 
+            prop="Username" 
+            label="用户名" 
+            width="180">
+          </el-table-column>
+          <el-table-column 
+          prop="Password" 
+          label="密码">
+          </el-table-column>
       </el-table>
     </template>
-  </div>
 </div>
 </body>
 <script src="js/index.js"></script>

@@ -3,58 +3,68 @@
 <head>
 <meta charset="utf-8">
 <title>ajax测试</title>
-<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<meta charset="utf-8">
+<!--引入element2.4.6样式-->
+<link rel="stylesheet" href="css/element.css">
+<!--引入vue2.5.17框架-->
+<script src="js/vue.js"></script>
+<!--引入element2.4.6组件-->
+<script src="js/element.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="box">
-    name:<input type = "text" v-model = "name">
-<br>
-    url:<input type = "text" v-model = "url">
-<br>
-    value:<input type = "text" v-model = "value">
-<br>
-    <input type="button" @click="post(name,url,value)" value="Submit">
-<br>
-    {{c}}
+<div id="app">
+    
+<template>
+    <el-table
+      :data="tableData"
+      style="width: 100%">
+      <el-table-column
+        prop="date"
+        label="日期"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址">
+      </el-table-column>
+    </el-table>
+  </template>
+
 </div>
 <script type = "text/javascript">
-    window.onload = function(){
-    var vm = new Vue({
-    el:'#box',
-    data:{
-        name:'',
-        url:'',
-        value:'',
-        c:'',
-    },
-    watch : {
-        name:function(val) {
-            this.name = val;
-        },
-        url:function (val) {
-            this.url = val;
-        },
-        value:function (val) {
-            this.value = val;
+var Main = {
+      data() {
+        return {
+          tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }]
         }
-    },
-    methods:{
-        post:function(name,url,value){
-            var self = this;
-            //发送 post 请求
-            this.$http.post('http://192.168.23.128/test.php',{
-                name:name,url:url,value:value
-            },{emulateJSON:true}).then(function(res){
-                this.c = res.data;
-                //alert(typeof(this.c));
-            },function(res){
-                console.log(res.status);
-            });
-        }
+      }
     }
-    });
-}
+console.log(this.tableData);
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#app')
 </script>
 </body>
 </html>

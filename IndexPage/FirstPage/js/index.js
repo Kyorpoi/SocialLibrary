@@ -47,7 +47,7 @@ var Search = {
           }],
           pwd: '',
           value:'',
-          c:[]
+          resultData:[]
         }
       }
     },
@@ -64,9 +64,11 @@ var Search = {
           Value:this.form.pwd,
           CColName:'Password[=]'
         },{emulateJSON:true}).then(function(res){
-            this.form.c = res.data;
-            //alert(res.data);
+          this.$http.get('http://192.168.23.128/data.json').then(res=>{
+            this.form.resultData = res.body;
+          })
         },function(res){
+          alert('数据请求出错，请稍后再试');
             console.log(res.status);
         });
         //console.dir(this.form.pwd);
@@ -80,79 +82,36 @@ var Search = {
           Value:this.form.pwd,
           CColName:'Password[~]'
         },{emulateJSON:true}).then(function(res){
-            this.form.c = res.data;
-            console.dir(this.form.c.Username);
-            //alert(res.data);
+          this.$http.get('http://192.168.23.128/data.json').then(res=>{
+            this.form.resultData = res.body;
+            //console.log(res);
+            //console.log(this.form.resultData);
+          })
+            //this.form.result = res.data;
+            //console.dir(this.form.c.Username);
+            //console.log(this.form.result);
+            //this.form.result=JSON.parse(this.form.result);
+            //alert(typeof(this.form.result));
         },function(res){
-            //console.log(res.status);
-            
+          alert('数据请求出错，请稍后再试');
+          console.log(res.status);
         });
         //console.dir(this.form.pwd);
         //console.dir(this.form.value);
         //console.log('accurate!');
+      },
+      doReset() {
+        window.location.reload();
+      },
+      md5Encode(){
+        this.form.pwd = md5(this.form.pwd);
       }
     }
   }
 var Result = {
     data() {
       return {
-        tableData3: [{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        }, {
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },{
-          mail: 'test@123.com',
-          name: '王小虎',
-          password: '123456'
-        },
+        tableData: [
         ]
       }
     }
@@ -161,5 +120,5 @@ var Ctor = Vue.extend(Header)
 new Ctor().$mount('#Header')
 var Ctor = Vue.extend(Search)
 new Ctor().$mount('#Search')
-var Ctor = Vue.extend(Result)
-new Ctor().$mount('#Result')
+//var Ctor = Vue.extend(Result)
+//new Ctor().$mount('#Result')
