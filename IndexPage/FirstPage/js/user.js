@@ -41,7 +41,8 @@ var Search = {
         }],
         user: '',
         value:'',
-        resultData:[]
+        resultData:[],
+        loading: true
       }
     }
   },
@@ -55,12 +56,12 @@ var Search = {
       //发送 post 请求进行精确查询
       //alert(this.form.user);
       if(!this.form.user){
-        this.$alert('密码为空！', '未输入密码！', {
+        this.$alert('用户名为空！', '未输入用户名！', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
               type: 'info',
-              message: '输入要查询的密码之后才可以进行查询'
+              message: '输入要查询的用户名之后才可以进行查询'
             });
           }
         });
@@ -80,7 +81,8 @@ var Search = {
           this.$http.post('http://192.168.23.128/Search.php',{
           TableName:this.form.value,
           Value:this.form.user,
-          CColName:'Password[=]'
+          CColName:'Username[=]',
+          Option:3
         },{emulateJSON:true}).then(function(res){
           this.$http.get('http://192.168.23.128/data.json').then(res=>{
             this.form.resultData = res.body;
@@ -89,7 +91,7 @@ var Search = {
           this.$alert('请求数据错误','请联系管理员'),{
             confirmButtonText:'确定'
           }
-            console.log(res.status);
+            //console.log(res.status);
         });
         //console.dir(this.form.user);
         //console.dir(this.form.value);
@@ -99,12 +101,12 @@ var Search = {
     Submit1() {
       //发送 post 请求进行模糊查询
       if(!this.form.user){
-        this.$alert('密码为空！', '未输入密码！', {
+        this.$alert('用户名为空！', '未输入用户名！', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
               type: 'info',
-              message: '输入要查询的密码之后才可以进行查询'
+              message: '输入要查询的用户名之后才可以进行查询'
             });
           }
         });
@@ -124,7 +126,8 @@ var Search = {
         this.$http.post('http://192.168.23.128/Search.php',{
           TableName:this.form.value,
           Value:this.form.user,
-          CColName:'Password[~]'
+          CColName:'Username[~]',
+          Option:3
         },{emulateJSON:true}).then(function(res){
           this.$http.get('http://192.168.23.128/data.json').then(res=>{
             this.form.resultData = res.body;
@@ -138,7 +141,7 @@ var Search = {
             //alert(typeof(this.form.result));
         },function(res){
           alert('数据请求出错，请稍后再试');
-          console.log(res.status);
+          //console.log(res.status);
         }); 
       }
       //console.dir(this.form.user);
@@ -148,8 +151,12 @@ var Search = {
     doReset() {
       window.location.reload();
     },
-    md5Encode(){
-      this.form.user = md5(this.form.user);
+    prompt(){
+      this.$notify.info({
+        title: '提示',
+        message: '输入用户名以寻找自己的用户名对应的密码来查看自己的账户是否泄露。',
+        position: 'top-left'
+      });
     }
   }
 }

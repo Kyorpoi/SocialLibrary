@@ -27,21 +27,16 @@ var Search = {
           value : '766Games',
           label : '766游戏网'
         },{
-          value : 'Acfun',
-          label : 'Acfun'
-        },{
           value : 'Mumayi',
           label : '木蚂蚁'
-        },{
-          value : 'Renren',
-          label : '人人网'
         },{
           value : 'Unknown',
           label : '未知杂数据'
         }],
         email: '',
         value:'',
-        resultData:[]
+        resultData:[],
+        loading: true
       }
     }
   },
@@ -55,12 +50,12 @@ var Search = {
       //发送 post 请求进行精确查询
       //alert(this.form.email);
       if(!this.form.email){
-        this.$alert('密码为空！', '未输入密码！', {
+        this.$alert('邮箱为空！', '未输入邮箱！', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
               type: 'info',
-              message: '输入要查询的密码之后才可以进行查询'
+              message: '输入要查询的邮箱之后才可以进行查询'
             });
           }
         });
@@ -80,7 +75,8 @@ var Search = {
           this.$http.post('http://192.168.23.128/Search.php',{
           TableName:this.form.value,
           Value:this.form.email,
-          CColName:'Password[=]'
+          CColName:'Email[=]',
+          Option:2
         },{emulateJSON:true}).then(function(res){
           this.$http.get('http://192.168.23.128/data.json').then(res=>{
             this.form.resultData = res.body;
@@ -89,7 +85,7 @@ var Search = {
           this.$alert('请求数据错误','请联系管理员'),{
             confirmButtonText:'确定'
           }
-            console.log(res.status);
+            //console.log(res.status);
         });
         //console.dir(this.form.email);
         //console.dir(this.form.value);
@@ -99,12 +95,12 @@ var Search = {
     Submit1() {
       //发送 post 请求进行模糊查询
       if(!this.form.email){
-        this.$alert('密码为空！', '未输入密码！', {
+        this.$alert('邮箱为空！', '未输入邮箱！', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
               type: 'info',
-              message: '输入要查询的密码之后才可以进行查询'
+              message: '输入要查询的邮箱之后才可以进行查询'
             });
           }
         });
@@ -124,7 +120,8 @@ var Search = {
         this.$http.post('http://192.168.23.128/Search.php',{
           TableName:this.form.value,
           Value:this.form.email,
-          CColName:'Password[~]'
+          CColName:'Email[~]',
+          Option:2
         },{emulateJSON:true}).then(function(res){
           this.$http.get('http://192.168.23.128/data.json').then(res=>{
             this.form.resultData = res.body;
@@ -138,13 +135,23 @@ var Search = {
             //alert(typeof(this.form.result));
         },function(res){
           alert('数据请求出错，请稍后再试');
-          console.log(res.status);
+          //console.log(res.status);
         }); 
       }
       //console.dir(this.form.email);
       //console.dir(this.form.value);
       //console.log('accurate!');
     },
+    doReset() {
+      window.location.reload();
+    },
+    prompt(){
+      this.$notify.info({
+        title: '提示',
+        message: '输入邮箱以寻找自己的邮箱对应的密码来查看自己的账户是否泄露。',
+        position: 'top-left'
+      });
+    }
   }
 }
 

@@ -18,14 +18,37 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
     $TableName =  isset($_POST['TableName']) ? htmlspecialchars($_POST['TableName']) : '';
     $CColName = isset($_POST['CColName']) ? htmlspecialchars($_POST['CColName']) : '';
     $Value =  isset($_POST['Value']) ? htmlspecialchars($_POST['Value']) : '';
+    $Option = isset($_POST['Option']) ? htmlspecialchars($_POST['Option']) : '';
 
-    $SColName=array("Username","Password");
+    switch ($Option) {
+        case 1:
+            $SColName=array("Username","Password");
+            break;
+        case 2:
+            $SColName=array("Email","Password");
+        case 3:
+            $SColName=array("Username","Password");
+        case 4:
+            $SColName=array("Name","Address","Phone","Email");
+        default:
+            # code...
+            break;
+    }
     
-    $result = $database -> select($TableName,[
+    if($Option == 4){
+        $result = $database -> select($TableName,[
+            $SColName[0],$SColName[1],$SColName[2],$SColName[3]
+        ],[
+            $CColName => "$Value"
+        ]);
+    }
+    else{
+        $result = $database -> select($TableName,[
         $SColName[0],$SColName[1]
     ],[
         $CColName => "$Value"
     ]);
+    }
 /*
     $result = $database -> debug() -> select("106w", [
         "Username",

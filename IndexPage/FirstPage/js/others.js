@@ -13,33 +13,15 @@ var Header = {
     methods: {
     }
   }
-var Search = {
+  var Search = {
     data() {
       return {
         form: {
           dbs: [{
-            value : '94im',
-            label : '94im' 
-          },{
-            value : '106w',
-            label : '106w'
-          },{
-            value : '766Games',
-            label : '766游戏网'
-          },{
-            value : 'Acfun',
-            label : 'Acfun'
-          },{
-            value : 'Mumayi',
-            label : '木蚂蚁'
-          },{
-            value : 'Renren',
-            label : '人人网'
-          },{
-            value : 'Unknown',
-            label : '未知杂数据'
+            value : 'DangdangNet',
+            label : '当当网' 
           }],
-          pwd: '',
+          email: '',
           value:'',
           resultData:[],
           loading: true
@@ -47,21 +29,21 @@ var Search = {
       }
     },
     watch:{
-      pwd:function(val){
-        this.form.pwd = val;
+      email:function(val){
+        this.form.email = val;
       }
     },
     methods: {
       Submit() {
         //发送 post 请求进行精确查询
-        //alert(this.form.pwd);
-        if(!this.form.pwd){
-          this.$alert('密码为空！', '未输入密码！', {
+        //alert(this.form.email);
+        if(!this.form.email){
+          this.$alert('邮箱为空！', '未输入邮箱！', {
             confirmButtonText: '确定',
             callback: action => {
               this.$message({
                 type: 'info',
-                message: '输入要查询的密码之后才可以进行查询'
+                message: '输入要查询的邮箱之后才可以进行查询'
               });
             }
           });
@@ -80,9 +62,9 @@ var Search = {
         else{
             this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
-            Value:this.form.pwd,
-            CColName:'Password[=]',
-            Option:1
+            Value:this.form.email,
+            CColName:'Email[=]',
+            Option:4
           },{emulateJSON:true}).then(function(res){
             this.$http.get('http://192.168.23.128/data.json').then(res=>{
               this.form.resultData = res.body;
@@ -93,20 +75,20 @@ var Search = {
             }
               //console.log(res.status);
           });
-          //console.dir(this.form.pwd);
+          //console.dir(this.form.email);
           //console.dir(this.form.value);
           //console.log('accurate!');
         }
       },
       Submit1() {
         //发送 post 请求进行模糊查询
-        if(!this.form.pwd){
-          this.$alert('密码为空！', '未输入密码！', {
+        if(!this.form.email){
+          this.$alert('邮箱为空！', '未输入邮箱！', {
             confirmButtonText: '确定',
             callback: action => {
               this.$message({
                 type: 'info',
-                message: '输入要查询的密码之后才可以进行查询'
+                message: '输入要查询的邮箱之后才可以进行查询'
               });
             }
           });
@@ -125,9 +107,9 @@ var Search = {
         else{
           this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
-            Value:this.form.pwd,
-            CColName:'Password[~]',
-            Option:1
+            Value:this.form.email,
+            CColName:'Email[~]',
+            Option:4
           },{emulateJSON:true}).then(function(res){
             this.$http.get('http://192.168.23.128/data.json').then(res=>{
               this.form.resultData = res.body;
@@ -135,7 +117,7 @@ var Search = {
               //console.log(this.form.resultData);
             })
               //this.form.result = res.data;
-              //console.dir(this.form.c.Username);
+              //console.dir(this.form.c.email);
               //console.log(this.form.result);
               //this.form.result=JSON.parse(this.form.result);
               //alert(typeof(this.form.result));
@@ -144,27 +126,24 @@ var Search = {
             //console.log(res.status);
           }); 
         }
-        //console.dir(this.form.pwd);
+        //console.dir(this.form.email);
         //console.dir(this.form.value);
         //console.log('accurate!');
       },
       doReset() {
         window.location.reload();
       },
-      md5Encode(){
-        this.form.pwd = md5(this.form.pwd);
-      },
       prompt(){
         this.$notify.info({
           title: '提示',
-          message: '输入密码以寻找自己的用户名来查看自己的账户是否泄露。',
+          message: '输入邮箱以寻找自己的信息是否泄露。',
           position: 'top-left'
         });
       }
     }
   }
-
-var Ctor = Vue.extend(Header)
-new Ctor().$mount('#Header')
-var Ctor = Vue.extend(Search)
-new Ctor().$mount('#Search')
+  
+  var Ctor = Vue.extend(Header)
+  new Ctor().$mount('#Header')
+  var Ctor = Vue.extend(Search)
+  new Ctor().$mount('#Search')

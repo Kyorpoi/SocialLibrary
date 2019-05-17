@@ -6,6 +6,7 @@
 */
 html{
 	min-width: 740px;
+	background-color: #ffffe5;
 }
 #Header{
 	height: 61px;
@@ -44,3 +45,30 @@ html{
 a{
 	text-decoration:none;
 }
+#footer{
+	height: 61px;
+	padding-top: 15px;;
+	padding-left: 15px;
+	font-size: 15px;
+	color: #FFFFFF;
+	background-color: #545c64;
+	
+}
+a:link { 
+	color:#FFFFFF; 
+	text-decoration:underline; 
+	text-decoration: none;
+	} 
+a:visited { 
+	color:#FFFFFF; 
+	text-decoration:none; 
+	
+	} 
+a:hover { 
+	color:#FFFFFF; 
+	text-decoration:none; 
+	} 
+a:active { 
+	color:#FFFFFF; 
+	text-decoration:none; 
+	} 

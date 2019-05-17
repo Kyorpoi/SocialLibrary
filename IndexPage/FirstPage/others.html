@@ -26,7 +26,7 @@
       <div id="title">泄露数据查询系统</div>
     <div id="menu">
     <el-menu
-      default-active="2"
+      default-active="4"
       mode="horizontal"
       background-color="#545c64"
       text-color="#fff"
@@ -42,7 +42,7 @@
   <div id="Search">
     <el-form ref="form" :model="form" label-width="80px">
     <el-form-item label="待查邮箱">
-      <el-input v-model="form.email" placeholder="请输入要查询的邮箱地址"></el-input>
+      <el-input v-model="form.email" placeholder="请输入要查询的邮箱"></el-input>
     </el-form-item>
     <el-form-item label="数据库">
     <template>
@@ -70,33 +70,41 @@
         border 
         style="width: 100%">
           <el-table-column 
-            prop="Email" 
-            label="邮箱" 
+            prop="Name" 
+            label="姓名" 
             width="180">
           </el-table-column>
           <el-table-column 
-          prop="Password" 
-          label="密码">
+          prop="Address" 
+          label="地址">
+          </el-table-column>
+          <el-table-column 
+          prop="Phone" 
+          label="电话号码">
+          </el-table-column>
+          <el-table-column 
+          prop="Email" 
+          label="邮箱">
           </el-table-column>
       </el-table>
     </template>
 </div>
 <div id="footer">
-  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline"><a href="../index.html">网站首页</a></span><span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="https://github.com/YukiMuraRindon">关于我们</a></span> <span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="Mailto:rinndonn@outlook.com">联系我们</a></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline">当前时间：<span style="display:inline" id="show"></span></p>
+    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline"><a href="../index.html">网站首页</a></span><span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="https://github.com/YukiMuraRindon">关于我们</a></span> <span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="Mailto:rinndonn@outlook.com">联系我们</a></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline">当前时间：<span style="display:inline" id="show"></span></p>
 </div>
 </body>
-<script src="js/email.js"></script>
+<script src="js/others.js"></script>
 <script type="text/javascript"> 
-  window.onload = function() {  
-  var show = document.getElementById("show");  
-  setInterval(function() {   
-  var time = new Date();      
-  var m = time.getMonth() + 1;   
-  var t = time.getFullYear() + "-" + m + "-"     
-  + time.getDate() + " " + time.getHours() + ":"     
-  + time.getMinutes() + ":" + time.getSeconds();   
-  show.innerHTML = t;  
-  }, 1000); 
-  };
+    window.onload = function() {  
+    var show = document.getElementById("show");  
+    setInterval(function() {   
+    var time = new Date();      
+    var m = time.getMonth() + 1;   
+    var t = time.getFullYear() + "-" + m + "-"     
+    + time.getDate() + " " + time.getHours() + ":"     
+    + time.getMinutes() + ":" + time.getSeconds();   
+    show.innerHTML = t;  
+    }, 1000); 
+    };
 </script>
 </html>

@@ -12,7 +12,7 @@
 	<!--引入element2.4.6样式-->
 	<link rel="stylesheet" href="css/element.css">
 	<!--引入vue2.5.17框架-->
-	<script src="js/vue.js"></script>
+	<script src="js/vue.min.js"></script>
 	<!--引入element2.4.6组件-->
   <script src="js/element.js"></script>
   <script src="js/vue-resource.min.js"></script>
@@ -34,8 +34,7 @@
       <el-menu-item index="1"><a href="index.html">密码查询</a></el-menu-item>
       <el-menu-item index="2"><a href="email.html">邮箱查询</a></el-menu-item>
       <el-menu-item index="3"><a href="user.html">用户名查询</a></el-menu-item>
-      <el-menu-item index="4"><a href="#">QQ群关系查询</a></el-menu-item>
-      <el-menu-item index="5"><a href="#">其他数据查询</a></el-menu-item>
+      <el-menu-item index="4"><a href="others.html">其他数据查询</a></el-menu-item>
     </el-menu>
     </div>
   </div>
@@ -43,7 +42,7 @@
   <div id="Search">
     <el-form ref="form" :model="form" label-width="85px">
     <el-form-item label="待查用户名">
-      <el-input v-model="form.user" placeholder="请输入要查询的密码"></el-input>
+      <el-input v-model="form.user" placeholder="请输入要查询的用户名"></el-input>
     </el-form-item>
     <el-form-item label="数据库">
     <template>
@@ -60,8 +59,8 @@
     <el-form-item>
       <el-button type="primary" @click="Submit()">精确查询</el-button>
       <el-button type="primary" @click="Submit1()">模糊查询</el-button>
-      <el-button type="primary" @click="doReset">重置</el-button>
-      <el-button type="primary" @click="md5Encode()">md5加密</el-button>
+      <el-button type="primary" @click="doReset()">重置</el-button>
+      <el-button type="primary" @click="prompt()">提示</el-button>
     </el-form-item>
   </el-form>
     <template>
@@ -82,6 +81,22 @@
       </el-table>
     </template>
 </div>
+<div id="footer">
+  <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline"><a href="../index.html">网站首页</a></span><span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="https://github.com/YukiMuraRindon">关于我们</a></span> <span style="display:inline"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp| &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="Mailto:rinndonn@outlook.com">联系我们</a></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="display:inline">当前时间：<span style="display:inline" id="show"></span></p>
+</div>
 </body>
-<script src="js/index.js"></script>
+<script src="js/user.js"></script>
+<script type="text/javascript"> 
+  window.onload = function() {  
+  var show = document.getElementById("show");  
+  setInterval(function() {   
+  var time = new Date();      
+  var m = time.getMonth() + 1;   
+  var t = time.getFullYear() + "-" + m + "-"     
+  + time.getDate() + " " + time.getHours() + ":"     
+  + time.getMinutes() + ":" + time.getSeconds();   
+  show.innerHTML = t;  
+  }, 1000); 
+  };
+</script>
 </html>
