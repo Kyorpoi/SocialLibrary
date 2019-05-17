@@ -9,12 +9,29 @@ html{
 }
 #Header{
 	height: 61px;
+	text-align: center;
+	background-color: #545c64;
 }
-#Search{
-	width: 740px;
+#title{
+	color: #FFFFFF;
+	display: inline-block;
+	text-align: left;
+	float: left;
+	text-align: center;
+	padding-top: 15px;;
+	padding-left: 15px;
+	font-size: 20px;
+	width:190px;
+}
+#menu{
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 20px;
+	width: 740px;
+	height: 61px;
+}
+#Search{
+	width: 700px;
+	padding-left: 205px;
 	padding-top: 20px;
 }
 #Result{
