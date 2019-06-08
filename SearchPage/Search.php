@@ -17,7 +17,7 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
     $TableName =  isset($_POST['TableName']) ? htmlspecialchars($_POST['TableName']) : '';
     $CColName = isset($_POST['CColName']) ? htmlspecialchars($_POST['CColName']) : '';
-    $Value =  isset($_POST['Value']) ? htmlspecialchars($_POST['Value']) : '';
+    $Value =  isset($_POST['CColName']) ? htmlspecialchars($_POST['Value']) : '';
     $Option = isset($_POST['Option']) ? htmlspecialchars($_POST['Option']) : '';
 
     switch ($Option) {

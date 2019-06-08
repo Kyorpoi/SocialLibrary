@@ -15,8 +15,11 @@
 	<script src="js/vue.min.js"></script>
 	<!--引入element2.4.6组件-->
   <script src="js/element.js"></script>
+  <!--引入vue-ajax组件-->
   <script src="js/vue-resource.min.js"></script>
+  <!--引入md5加密组件-->
   <script src="js/md5.min.js"></script>
+  <!--引入css文件以控制样式-->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -92,11 +95,7 @@
   var show = document.getElementById("show");  
   setInterval(function() {   
   var time = new Date();      
-  var m = time.getMonth() + 1;   
-  var t = time.getFullYear() + "-" + m + "-"     
-  + time.getDate() + " " + time.getHours() + ":"     
-  + time.getMinutes() + ":" + time.getSeconds();   
-  show.innerHTML = t;  
+  show.innerHTML = time.toLocaleString();  
   }, 1000); 
   };
 </script>
