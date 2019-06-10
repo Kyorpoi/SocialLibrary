@@ -1,0 +1,13 @@
+If you are checking an intranet site with the http:// protocol, but which links to files on the company file server with the file:// protocol, enable "Allow local files in remote check" in the advanced options. (Linking to a local file from a http:// page is normally considered to be an error)
+You can press ALT-ENTER in Xenu's Link Sleuth List View or click on the Properties logo on the toolbar to see who links to an URL.
+Press CTRL-R to retry all broken URLs.
+If you have too many failed connections, try setting less threads in the Options Dialog.
+Right-click on an URL to get interesting features: Google Cache and Internet Archive; this can help you to find the former content of a broken URL, so that you can search for it with a search engine.
+You can launch the report at any time by pressing 'R' or from the menu, you don't have to wait until Xenu's Link Sleuth is finished going through your site.
+You can sort the List View by clicking on the top of a column.
+If it takes forever to launch the report, then you should disable the site map in the options dialog.
+Over 30 frequently asked questions are answered on the homepage (click the button in the "About" dialog).
+There is an announcements and a discussion mailing list for Xenu's Link Sleuth. Visit the homepage (click the button in the "About" dialog) for more details.
+You can adjust all columns by pressing CTRL and the PLUS key on the numeric keypad.
+Xenu remembers the list of URL-Prefixes to include or to skip for every URL you have checked in the past. Just select or enter the URL you want to check, and the previous list of includes/skips will be set.
+This is the last tip.

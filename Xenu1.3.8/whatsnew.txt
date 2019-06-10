@@ -1,0 +1,802 @@
+new features in this release of Xenu's Link Sleuth:
+http://home.snafu.de/tilman/xenulink.html
+
+Please save the previous version of XENU.ZIP "just in case" :-)
+
+Ask questions in the user group:
+http://groups.yahoo.com/group/xenu-usergroup/
+(postings from new users are subject to approval by the moderator, to avoid spamming)
+
+4.9.2010 (1.3.8)
+
+Major improvements:
+19.6.2010: check css @import statements within <STYLE>...</STYLE>
+           check url() elements within <STYLE>...</STYLE>
+		   check url() element within STYLE=
+		   (dedicated to The Gorgeous Princess Victoria of Sweden, whose
+            wedding to Clark Kent contributed that there's really nothing on
+            television besides herself and the soccer world cup :-) )
+20.6.2010: parse css files similar to <STYLE>...</STYLE>
+
+Minor improvements:
+1.7.2010: sort "broken page-local links" section in report
+3.7.2010: url property dialog now resizeable
+6.7.2010: mailto with empty rest => "mailto:", not "mailto:@".
+24.7.2010: mailto:name%40host.com => mailto:name@host.com
+25.7.2010: all mailto: URLs of a host with successful DNS lookup are set to "skip type"
+27.7.2010: dito also for previously failed mailto: URLs of that successful looked up host
+27.7.2010: light green color for "mail host ok", which replaces text "skip type" for mailto:
+7.8.2010: renamed "maximum level" to "maximum depth"
+14.8.2010: GraphViz only for "ok" links
+
+Misc:
+20.6.2010: changed link counting method, now in AddUrl
+4.7.2010: clean possible memory leaks when finishing; FreeLibrary() for DNSAPI.DLL
+7.7.2010: changed toolbars slightly, preparations for VS2010
+20.7.2010: for VS2010, expand application class with virtual INI functions because I hate the registry
+15.8.2010: "#" as error (not in public release)
+24.8.2010: DLL security: fully qualified path for LoadLibrary()
+
+Bug fixes:
+20.6.2010: Lower case in check for .gif, .png etc
+23.7.2010: corrected bug in change from 25.5.2010 "set recent URL list to 100 instead of 10"
+1.8.2010: correct bug about CCriticalSection usage for ServerMap and CharsetMap
+2.9.2010: fix for false alert in VS2010 buffer overflow check
+
+
+12.6.2010 (1.3.7)
+
+Minor improvements:
+12.6.2010: .class files that are in an external .jar file are marked as skipped
+		   ".class in Jar" property is now saved in .XEN file
+
+Bug fixes:
+14.6.2010: correct skip of ".class in Jar" property when choosing next thread
+           set all unhandled ".class in Jar" URLs as "not found" when all else done
+
+Misc:
+12.6.2010: CLinkInfo Archive format version 15 (".class in Jar" property)
+
+
+
+11.6.2010 (1.3.6)
+
+Major improvements:
+24.2.2010: Check the domains of mail addresses (DNS lookup for MX record)
+
+Minor improvements:
+7.12.2009: Include PARSETEST4 section in general release (convert characters >80H to %XX, for "international" URLs)
+19.12.2009: For "international" characters in local files: Use Unicode for local directory search, URL launch in browser, read/check local files
+20.12.2009: But not for Windows 95/98/ME
+22.12.2009: add ".class" for applets if needed, replace "." with "/".
+            example: http://www.colorado.edu/physics/2000/applets/bec.html
+27.12.2009: updated to NSIS 2.46
+10.1.2010: use version 6 list column sort arrows on XP and higher
+14.1.2010: added Description column
+15.1.2010: added warning when settings overwritten by profile
+16.1.2010: attempt at decoding .jar files for APPLET ARCHIVE thanks to
+           http://www.codeguru.com/cpp/cpp/cpp_mfc/article.php/c4049/
+		   However:
+		   - only one .jar archive per applet
+		   - no unicode in file names
+		   - name of archive must end with .jar
+		   - .jar file must be internal, or the class link will remain broken
+		   - .class "in Jar" property isn't saved in .XEN file (which prevents standard access in favor of waiting for .jar lookup)
+24.1.2010: added <video src=
+27.1.2010: improved list control divider double click (title is the minimum)
+26.2.2010: improved extra text in domain mail check 
+13.3.2010: Get page body only if not redirection or redirection but no "Location:" in header
+           (should make PARSETEST3 fix superfluous)
+16.3.2010: ...
+30.3.2010: Abort box for ftp orphan search
+2.4.2010: [Options] Accept="*/*"  (default value)
+14.4.2010-6.5.2010: milliseconds in duration
+12.5.2010: reset e-mail flag when loading .XEN file, because if set it would mail and quit after loading a finished job
+12.5.2010: include link text in report (LINKTEXT compile option)
+25.5.2010: set recent URL list to 100 instead of 10
+3.6.2010: version nr. in report
+6.6.2010: show count of included / excluded URLs in the report
+6.6.2010: Abort box for orphan search always
+
+Bug fixes:
+15.12.2009: PARSETEST4 section: replaced "> 80X" with ">= 80X"
+20.12.2009: added version check for Unicode Clipboard and Sitemap for Windows 95/98/ME (like 27.1.2009)
+21.12.2009: corrected broken banner links
+22.12.2009: tell "anchor occurs multiple times" only once per URL
+4.1.2010: remove stuff after "?" in mailto: due to Microsoft error in AfxParseURLEx()
+10.1.2010: fixed list column sort arrows wrongly displayed in unsorted columns (on 7, but not on XP)
+12.1.2010: fixed "//" bug in applet codebase in local url
+15.1.2010: disabled and unchecked "Inactive" checkbox after loading new profile
+18.1.2010: fixed title line of tab export
+20.1.2010: Don't assume URLs to be UTF-8, use current charset instead
+           However: this solution isn't perfect, because the correct charset of an URL would be the referring URL
+		   But in most cases it will work, because URLs usually have the same charset
+		   Known bug: Root URL with exotic characters
+20.1.2010: Corrected exotic URLs in sitemap
+26.1.2010: Fixed % in file: URLs, only convert %XX
+27.1.2010: "Conversion to lowercase" option uses codepage for conversion
+31.1.2010: Fixed bug in report (max size + max size url), probably introduced on 15.1.2010
+15.3.2010: vNormalizeURL() with conversion to UTF8 prior to AfxMyParseURL()
+           store URLs in UTF8, unless already ANSI or ISO-8859-1 (1252)
+		   vRemovePercents for display only
+3.4.2010:  prevent reentrant calls to vDoIdle(); 
+           set fileNotFound status if tmp URL content file deleted by antivirus software
+10.4.2010: replaced "> 80X" with ">= 80X" in vAnsi2EntityEscaped()
+30.4.2010: changed user agent with "/" as requested in
+           http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
+		   and
+		   http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.8
+6.6.2010:  add milliseconds in sum for manager statistics avg calculation
+
+
+Misc:
+14.1.2010: CLinkInfo Archive format version 12 (Description)
+15.1.2010: CLinkInfo Archive format version 13 (size now 64 bit value)
+27.1.2010: OnNewDocument() with vNormalizeURL() instead of AfxMyParseURL()
+29.1.2010: OnNewDocument(): moved duplicate code to end
+5.5.2010: CLinkInfo Archive format version 14 (milliseconds)
+6.6.2010: MinSize, MaxSize unsigned
+
+
+5.12.2009 (1.3.5)
+
+Bug fixes:
+4.12.2009: Skip xmpp: and others properly
+4.12.2009: fixed another *.LNK file loss bug in NSIS script that would occur when installing in existing folder
+
+Misc:
+5.11.2009: processorArchitecture="*" in manifest
+28.11.2009: improved error messages for MultiByteToWideChar()
+29.11.2009: updated to NSIS 2.45
+1.12.2009: About box with correct spelling: "Xenu's"
+5.12.2009: created this version on new PC
+
+
+5.11.2009 (1.3.4)
+
+Minor improvements:
+30.5.2009: ignore "view-source:"
+1.6.2009: set SECURITY_FLAG_IGNORE_REVOCATION after ERROR_INTERNET_SEC_CERT_REV_FAILED (works only the first time, sadly)
+1.6.2009: ErrorDlg for ERROR_INTERNET_SEC_CERT_REV_FAILED only if SECURITY_FLAG_IGNORE_REVOCATION not set
+5.6.2009: set up minimum status line segment widths
+26.7.2009: Use local timezone when displaying date+time of website, instead of GMT
+29.8.2009: show time status every second
+9.10.2009: mention empty URLs in report to avoid confusion
+
+Bug fixes:
+20.10.2009: ignore MIME type and charset when result not HTTP_STATUS_OK
+5.11.2009: fixed /S setup.exe bug in NSIS script
+
+Misc:
+1.6.2009: ErrorDlg (certificates etc) now from app window, not desktop window
+9.10.2009: Test monocolor
+15.10.2009: merged AFX_INET_SERVICE_HTTP and AFX_INET_SERVICE_HTTPS in ThreadProcGET()
+16.10.2009: tired of character in version number, now using digits
+31.10.2009: VS2010 fixes: PFNCALLBACK, OnTimer (UINT_PTR), LRESULT OnFindReplace, INT_PTR lHnd
+3.11.2009: CLinkInfo Archive format version 11 (m_iThisURL -> m_dwThisURL)
+
+25.4.2009 (1.3c)
+
+Bug fixes:
+18.4.2009: Changed behaviour of google sitemap creation - only convert five characters to ampersand
+21.4.2009: Changed behaviour of google sitemap creation - Convert >80H characters to %XX
+
+Minor improvements:	
+21.4.2009: Only take the first TITLE, not later TITLEs
+
+
+18.4.2009 (1.3b)
+Install this version if you're in China, use Windows 95/98/ME, or check sites with over a million URLs.
+
+Minor improvements:	
+23.12.2008: ErrorDlg for ERROR_INTERNET_SEC_CERT_DATE_INVALID
+24.12.2008: http:// within the path, like in archive.org URLs is never a "//" error (see 30.11.2006)
+25.12.2008: ErrorDlg for ERROR_INTERNET_SEC_CERT_CN_INVALID and ERROR_INTERNET_SEC_CERT_REV_FAILED
+27.12.2008: Optimized array growth
+28.12.2008: Started IGNORETITLES compile option to save memory (ignores titles and server name)
+28.12.2008: Optimized charset, use ref in global hash table instead of CString (saves memory)
+29.12.2008: IGNORETITLES now ignores externals totally
+29.12.2008: improved speed for collecting pending URLs within visible section of xenu window
+29.12.2008: CCriticalSection for CharsetMap
+29.12.2008: Optimized server software name, use ref in global hash table instead of CString (saves memory)
+1.3.2009: Use PARSETEST version for general release
+18.4.2009: New NSIS installer script with much help from Andrey Aleksanyants
+
+Bug fixes:
+1.1.2009: Don't drop all input if </a> missing after <a...>
+12.1.2009: Made own upper case conversion (for users in China)
+27.1.2009: added version check, because Unicode API calls don't work for Windows 95/98/ME
+1.3.2009: corrected NL before charset in TAB export
+31.3.2009: corrected bug in high port numbers
+7.4.2009: fixed bug for PARSETEST version, moved replace "/./" with "/" higher in AfxMyParseURL()
+17.4.2009: report file not created message
+
+Misc:
+26.1.2009: replaced InitCommonControls() with InitCommonControlsEx()
+17.4.2009: attempt at html FORMs with POST query string (for FORMTEST version only)
+
+20.12.2008 (1.3)
+I've decided to call this version 1.3 instead of 1.2k. The international charset, the google maps, 
+and the "ID=" anchor were widely requested, so I guess this is really a good leap forward.
+
+Major improvements:
+- 22.1.2008: UTF-8 in Xenu Window and report
+- 23.1.2008: all charsets in Xenu Window and report
+- 2.2.2008: parse charset meta tag (note that header settings have priority!)
+- 2.2.2008: improved speed of charset handling by using hash table
+- 29.2.2008: Google Sitemap
+- 25.7.2008: parse ID= anchor
+- 23.11.2008, 6.12.2008: GraphViz export
+
+Minor improvements:	
+- 20.10.2007: Updated to InnoSetup 5.2.1
+- 28.11.2007: decode "encrypted" mailto (Use parse result for AFX_INET_SERVICE_MAILTO)
+- 1.12.2007: Updated to InnoSetup 5.2.2
+- 14.3.2007: Updated to InnoSetup 5.2.3
+- 22.1.2008: CLinkInfo Archive format version 10 (charset)
+- 8.3.2008: Accept-Language option (command line version only)
+            -language en / de / ...
+- 10.4.2008: removed wsprintf() calls
+- 8.5.2008: passive ftp option for ftp URLs too (previously just in Orphan check) *** unfinished, not saved in .XEN; Version 11 ***
+- 31.5.2008: new icon, sponsored by www.hitflip.de, designed by Dominic Raths
+- 8.6.2008: InternetCloseHandle() with trace, also trace in ftp stuff
+- 9.6.2008: ShellExecute() separated in File and Path; new vShellLaunchURL() function
+- 29.6.2008: Google Sitemaps: higher priority for root URL
+- 5.7.2008: Don't quit if mail fails
+- 5.7.2008: xenulog.txt with date, too
+- 5.7.2008: Improved email dialogbox (disable fields)
+- 25.7.2008: Skip </...> in parser segment; changed bParseAnchorTag() to be more general
+- 5.8.2008: report: detect and report redirection loops
+- 9.9.2008: IMG LONGDESC
+- 10.10.2008: Abort Dialog for sitemap
+- 15.10.2008: Fixed C++ language issues (scope of variables in 'for' loop) for VS2008; #define _WIN32_IE 0x0400
+- 17.10.2008: manifest for common control XP look and feel; 
+              HOLLOW_BRUSH for Bitmap in Tip Dialog, solves problem in 2005 attempt
+              http://tech.groups.yahoo.com/group/xenu-usergroup/message/445
+			  positive side effect: can now display exotic charset in text control
+- 18.10.2008: manifest resource http://www.codeproject.com/KB/winsdk/xptheme.aspx
+- 18.10.2008: sort list of redirections in report
+- 31.10.2008: GetExitCodeThread() result when not STILL_ACTIVE
+- 2.11.2008: added <OBJECT DATA="...">
+- 6.12.2008: Added column to pagemap
+
+Bug fixes:
+- 13.12.2007: catch empty URL in HREF etc
+- 14.2.2008: corrected WCHAR divider size bug in MakeShortStringW()
+- 11.3.2008: Google Sitemap only for internal URLs; escape &'"<>
+- 26.3.2008: CXenuDoc()::m_bCheckExternal set to profile value
+-  9.9.2008: corrected bug in mailto (user name was missing)
+-  9.9.2008: loop detection algorithm in redirection report sometimes had an endless loop itself
+- 24.9.2008: check for ";" removed in ParseImgTag() and ParseAnchorTag()
+- 26.9.2008: reset charset only for HTML with bodies, 
+             because of http://www.adventure-inn.com/ch/description/
+- 1.10.2008: URLs are also UTF-8
+- 1.10.2008: Clipboard URL copy in Unicode format
+- 5.10.2008: IDC_URL in Property Dialog also UTF-8
+- 11.10.2008: All fields in Property Dialog now in UTF-8
+- 2.11.2008: No double separator in context menu for local files with non-existing MIME types
+
+
+Misc:
+- 19.10.2008: ShellExecute with 0 as first param
+- 7.11.2008: Orphan size as LONGLONG
+- 19.11.2008: PARSETEST3 version for % stuff in redirections
+
+
+8.10.2007 (1.2j)
+Major improvements:
+- 5.6.2007: second options pane with 7 "secret" settings
+- 7.7.2007: up/down sort symbol on column header
+            http://www.codeguru.com/cpp/controls/listview/advanced/article.php/c4179/
+Minor improvements:
+- 4.10.2006: visible URLs are first in new threads
+- 4.10.2006: update listctrl when "busy" is set
+- 7.10.2006: 2nd part of report more efficient for huge sites
+- 12.10.2006: REMOVEDOUBLESLASH compile option removes "/../" too
+- 15.10.2006: application/xhtml+xml is hypertext, too
+- 15.10.2006: Updated to InnoSetup 5.1.8
+- 30.10.2006: Skip aim://, ymsgr://, rtsp://, xmpp://
+- 30.11.2006: better error message for ShellExecute() errors
+- 30.11.2006: "//" in URL after the host name is not "broken" when after a "?"
+- 8.1.2007: Max title length 1024
+- 16.1.2007: ftp dialogbox wider
+- 19.1.2007: [Options] MakeLowerCase=1  ==>  converts all URLs to lower case
+                                        (default is 0)
+- 3.3.2007: [Options] ListLocalDirectories=1  ==>  local directory listing										
+                                        (default is 0)
+- ??.3.2007: [Options] AllowLocalFilesInRemoteCheck=1  ==>  Allow file:// links in remote check
+                                        (default is 0)
+- 16.3.2007: Skip callto:
+- 25.3.3007: meta generator
+- 31.3.2007: Upgraded to InnoSetup 5.1.11
+- 31.3.2007: Title TrimRight()
+- 31.3.2007: update listctrl when title becomes known
+- 31.3.2007: convert titles in sitemap to &...; notation
+- 1.4.2007: Added most of http://www.htmlhelp.com/reference/html40/entities/special.html to conversion table
+- 29.5.2007: "asterisk" sound when done
+- 2.6.2007: -save option for command line version to save .XEN file (does overwrite)
+- 2.6.2007: all command line options for command line version can now be combined
+- 5.6.2007: MakeLowerCase, vNormalizeURL() slightly changed internally
+- 6.6.2007: .XEN Archive version 10
+- 8.6.2007: "Autostart" feature when opening .XEN file
+- 8.6.2007: all command line options for command line version can be used when opening .XEN file
+- 28.7.2007: retry feature in command line version (test)
+- 3.8.2007: Upgraded to InnoSetup 5.1.13
+- 15.8.2007: reset sort icon, and vUpdateColumnSortIcon() at InsertAll()
+
+Bug fixes:
+- 7.12.2006: check for  iIndex < pList->GetItemCount()
+- 13.2.2007: corrected bug in ListLocalDirectories feature (last file ignored)
+- 15.2.2007: wildcard version adds "*" at the end of each entry in "Check URL list"
+- 23.5.2007: aim: instead of aim://
+- 20.8.2007: remove "file://" for ShellExecute()
+- 21.9.2007: % size corrected in statistic (was % count!)
+- 22.9.2007: fixed CFindFile security leak, http://goodfellas.shellcode.com.ar/own/VULWKU200706142
+
+1.10.2006 (1.2i)
+Major improvements:
+  (none)
+Minor improvements:
+- 25.6.2006: Property dialogbox with count
+- 25.7.2006: Added orphan size
+- 19.8.2006: PARSETEST2 compile option (restore all %XX, like 23.7.2005)
+- 19.8.2006: Updated to InnoSetup 5.1.6
+- 9.9.2006: NEW Dialog Box wider
+- 16.9.2006: [Options] MaxRetry
+- file %TEMP%\XENULOG.TXT for people who have trouble launching the browser
+   (the file is not automatically sent to anyone, this must be done manually)
+Bug fixes:
+- 6.6.2006: vNormalizeURL (csBaseURL);
+- 24.7.2006: Microsoft bug in CStdioFile::ReadString workaround
+             (happened with files with a multiple of 128 with no CR on last line)
+			 http://www.mpdvc.de/html.htm#Q71
+			 http://avensoft.biz/kb/kbDetail.wsp?kb_id=162
+- 26.7.2006: Added missing HTTP status codes (412-415)
+- 30.7.2006 - 2.8.2006: corrected many HTML errors in report (Thanks Spike!)
+- 14.9.2006: corrected bug in 18.3.2006 feature that made Xenu slow when unfinished URLs only at the bottom of huge URL list
+- 18.9.2006: corrected error handling for smtp.Connect()
+- 10.11.2006: total elapsed hours, instead of modulo 24 in status line
+
+2.6.2006 (1.2h)
+Major improvements:
+- Tip of the day
+Minor improvements:
+- ALT part of <IMG > used for the title column
+- [Options] FailSimilarHosts=0 (current behaviour and default is 1)
+- more statistics for managers (min size with link, max size with link, avg size)
+- "In Links" and "Out Links" in headings for better readability when small
+- correct error message for empty ftp orphan directories
+- error message for empty local orphan directories
+- error message for non existing local orphan directories
+- orphan list sorted
+- (Test / by request only) IGNOREFRONTPAGEORPHANS
+- ftp host field allows port number,   ftphostname:port
+- ftp dialog fields stored in .INI file
+- ftp default page (e.g. index.html, home.html, default.asp, etc)
+- ftp dialog does not appear when Xenu is launched with "-url", but is still available in "corporate" version
+- ReportBroken2 more efficient
+- 8.6.2005 Updated to InnoSetup 5
+- slight change in .TAB format: Status-Code and Status-Text instead of Status only
+- prevent empty input in NEW dialog
+- Ignore "error" HTTP_STATUS_ACCEPTED (for user with VMware, host Fedora Core 9 who has NAT problems)
+- changed handling of "%XX" with file:// orphan files
+- 23.7.2005: AfxMyParseURL removes "%XX" with file:// URLs
+- include/exclude wildcard test thanks to http://www.codeproject.com/string/wildcmp.asp
+- better text for ftp orphan dialog
+- 18.3.2006: currently selected URL is first next new thread
+- 19.3.2006: ftp/gopher segment only when such URLs exist
+- 19.3.2006: put include/exclude settings into report
+- 1.4.2006: link to Google Sitemaps in report
+Bug fixes:
+- in file://///UNC-Host/Share, leading "//" is not an error
+- &#xnnn; now recognised (in addition to &#nnn;)
+- vNormalizeURL() when reading URL List
+- need space or semicolon before a "name", "href", etc
+- process % when checking an ftp URL on an ftp server
+
+
+18.3.2005 (1.2g)
+Major improvements:
+- Attempt at javascript thanks to
+  http://www.codeguru.com/Cpp/Cpp/string/regex/article.php/c2779/ 
+  details explained at 
+  http://home.snafu.de/tilman/xenulink.html#javascript
+Minor improvements:
+- [Options] ExcludeMSO=1 and Xenu ignores URLs that end with
+	/filelist.xml
+	/editdata.mso
+	/oledata.mso
+- Show elapsed time in status bar [15.1.2005 changed archiving format]
+- TARGET=_blank instead of TARGET=Xenu in report
+- New Version 2.44 of CSMTPConnection http://www.naughter.com/smtp.html
+- "//" in local files is always an error
+- mailed report as "XXXX.htm" instead of "XXXX.tmp.htm"
+- Version String in .XEN file
+- vTimeoutSimilarHosts() more efficient with huge sites
+- Faster local link checking (no copying to %temp% file)
+- HTTP_STATUS_REDIRECT_KEEP_VERB (307)
+- ERROR_INTERNET_CLIENT_AUTH_CERT_NEEDED (12044) error handling
+- passive ftp mode in orphan dialog box
+- Send XENU.INI file as mail test instead of CONFIG.SYS
+- Orphan check also for https://
+- "New" Dialogbox can be used to enter a ftp link (no crawling!)
+- Cookies allowed when [Options] AllowCookies=1
+  don't use this if you have links that delete or change something!
+- (Test / by request only) PARSETEST, ORPHANS_CASEINSENSIVE
+Bug fixes:
+- better error handling for error 12003 in FTP orphan check
+- _findclose in local orphan check (to unlock directory!)
+- /> bug fixed in META REFRESH
+- &# handling in vReplaceAmpStuff() and in bProcessLink()
+- handle redirection target as a possibly relative link
+- No empty URLs in URL list
+- date, size for file:///
+- alexa, google cache and wayback only for http:// and https://
+- offset in ParseTag as int instead of short for tags > 64K
+- cut off after '?' in remote orphan check
+- exclude excluded URLs in Orphan list
+- WINVER 0x0400
+
+6.8.2004 (1.2f)
+Major improvements:
+- Real setup (InnoSetup 4)
+- Status code for redirections
+- Context menu: Open in Google Cache
+- Context menu: Open in Wayback Machine
+- Context menu: Open Alexa
+Minor improvements:
+- report as "XXXX.htm" instead of "XXXX.tmp.htm"
+- Max-Level also "connected" to the URL
+- Compiled on Windows XP
+- List of unfinished threads when closing
+- Don't display ODP context menu for broken http://editors.dmoz.org links
+- "Display error" mentioned in Properties Box when too many links
+- Look for subdirectories when doing orphan searches
+- Remove "file:///" when launching local URLs without DDE
+- Change "\" to "/" for "file://" URLs because of problems with Opera 7.5
+Bug fixes:
+- Deletes TGH*.* files also when limited number of levels
+- Can work with http://www.dbdebunk.com: "location: " instead of "Location: "
+- Correct time in report (minute and second were mismatched)
+- ReportStatistics and ReportOrphans flags in .XEN file
+- No error message when click "not on a line"
+- Prevent re-entrancy of vAttention() when e-mailing report
+
+28.9.2003 (1.2e)
+Major improvements:
+- Remote Orphans
+- Bugfix for sites > 65535 links: m_FromTab set to 32bit
+- timeout feature (default: 60 secs)
+- STOP button in addition to the PAUSE toolbar button
+- Scan https:// websites with bad certificate (ERROR_INTERNET_INVALID_CA = 12045)
+- Validate URL with right mouse click
+Minor improvements:
+- Skip irc://, mms://, rtsp://, pnm://, wtai://
+- <hr> instead of "=========" in report
+- </li> in report, so that it is correct HTML
+- "Normalization" of URLs in include/exclude list
+- Len = 0 when file error with http GET
+- OpenRequest() with INTERNET_FLAG_NO_COOKIES
+- Site Map recursion warning
+- "//" in URL after the host name is not "broken" when part of
+  "http://" or "https://"
+- empty line in report after local link error for a page
+- Local orphans case insensitive
+- Automatic retries only when m_bBusy
+- CInternetSession local to thread, to make STOP possible
+- "http://dmoz.org" instead of "http://dmoz.org/" comparison, to avoid
+  extra menu item for dmoz-internal links
+- Properties at right-mouse-key always the last item
+- Make current item visible after sort
+- More random spidering to balance the load
+- Url Sort case unsensitive
+- Buffer overflow bug in unknown errors removed
+[29.5.2005 reinstalled VC++ after HD loss]
+
+14.9.2002 (1.2d)
+- "//" in URL after the host name is not "broken" when "http://" or "https://" after a "?"
+- Corrected bug that local non-HTML files would be downloaded in full
+- Corrected GUI bug in "new" dialog
+- Converted %5F to _
+- Change in cmdline version about profile reading
+  (Matching now done before Normalization)
+
+16.7.2002 (1.2c)
+- <BLOCKQUOTE CITE
+- Consider unexisting types like "httttp" as "not found"
+- Editing of ODP websites in the right-mouse-menu
+  (useful for editors at http://dmoz.org)
+- For local files, launch related applications (e.g. viewer, editor)
+  with the right-mouse-menu
+- Corrected bug that had root page twice in Xenu list
+- "//" in URL after the host name is always an error
+- Prevent closing when threads running
+- "R" launches "Properties" in right-mouse-menu
+- Save directory of "Browse" location
+- Enlarged "New" Dialogbox
+- Retry also for error 403
+- Local checks for "#"
+- HTTP_STATUS_PROXY_AUTH_REQ handling not dependent of password setting
+- Ignore "error" HTTP_STATUS_RESET_CONTENT (at http://www.vietnamthink.com/ )
+- Corrected '%' bug with Orphan files
+- "\" not a bug when after a "?"
+- Correct # of Threads and URLs in status line when finished
+- Corrected Bug with stuff like "nohref=" or "classname=" inside
+
+30.11.2001 (1.2b)
+- !!!!! Moved the xenu.ini file from
+   \windows or \winnt to the current working directory
+- Corrected bug with </Script>
+- <TR BACKGROUND
+- <TH BACKGROUND
+
+6.10.2001 (1.2a)
+- extra column: time spent
+- Correct count for broken links in report
+- Can get size of some ftp files
+- <TABLE BACKGROUND
+- Append header information from redirected files even if a body exists,
+  because of http://wap.loop.de
+- Look up MIME type for local files
+- Unofficial Option in XENU.INI:
+  [Options] UseDDE=0 to disable DDE on some systems
+- Combined html and wml (WAP) scanning
+- <INPUT SRC="image.gif"> checked
+- Skip <SCRIPT>...</SCRIPT>
+- Logo in About-Box changed
+- Min Level can be 0
+- CTRL-Numpad-ADD to resize all columns
+- Attempt at Orphan files
+- Improved speed
+  - Better method for Url lookup
+  - no UrlTable search in ctor of CLinkInfo
+  - check for "txt", "jpg" etc more efficient
+  - m_csRootURL tested in bIncluded()
+  - CLinkInfo::vAddFromURL more efficient
+  - Internal function bHasBrokenToURLs() more efficient
+- Corrected weird bug in initial Combo-Box
+- Changed Text in NEW Dialogbox
+- Compiled with VC++ 6
+
+22.7.2001 (1.1f)
+- Changed User-Agent string to 
+    Xenu Link Sleuth
+  because of problems with many websites, e.g. www.sptimes.com
+
+21.7.2001 (1.1e)
+- CTRL-W and CTRL-Q shortcuts for Close and Exit
+- Ability to consider hard redirections as errors
+- Changed character in User-Agent string from ' to ´
+
+2.7.2001 (1.1d)
+- new error "no info to return" for empty web pages
+- corrected bug about saving to tab file when file exists
+- added statistics for managers :-)
+- HEAD command also for .zip, .exe .swf  (saves bandwidth)
+- serializing requests for name/password
+- changed include/exclude so as to work only on the *beginning* of URLs
+  (don't forget to start them with "http"!)
+
+(1.1c)
+- Added some extra error messages
+- Saving columns width
+- Adjusting column width with double-click
+- e-mail feature
+- removed mailto:www-request@infoseek.com from report
+- added LAYER SRC, IFRAME SRC and IMG LOWSRC
+- sort URLs in broken link section of the report
+- HEAD command also for .txt, .png, .rtf and .pdf (saves bandwidth)
+
+(1.1b)
+- Added <TD BACKGROUND="">
+- file:/// instead of file://
+- added BGSOUND
+- Compiled with VC++ 5.0, smaller
+- Can now launch URLs even with registry poorly configured
+- URLs of the report open in new window
+- Property box with Link Text / Title
+- URLs for include/exclude are "bound" to the URL
+
+(1.1a)
+- [ and ] in URLs
+- corrected bug in CODEBASE (must add "/" if not there)
+- corrected bug that deleted include/exclude fields
+- improved include/exclude dialog
+- added text for error 300
+- corrected bug about password sites
+
+(1.0w 14.4.2000)
+- PLUGINSPACE in EMBED tag now checked
+- APPLET now checked, with CLASS and ARCHIVE, relative to CODEBASE
+
+(1.0v 7.4.2000)
+- EMBED tag now checked
+- "Options" in the "New" dialog
+- "Return to top" in Report
+- Corrected bug in site map: broken links are not included
+- Now converting more &blah; characters
+- Titles get also converted
+- converting &blah; characters before normalizing
+- convert &# characters in URL
+- can now handle URLs like http://user:password@host/ or ftp or https
+- export always exports *all*, regardless of the view.
+- sadly an old bug is back in: URLs with "\" are not recognised as broken.
+- Links that start with "/../" are considered to be broken
+
+(1.0u 15.10.1999)
+- "skip these" feature - this really excudes URLs
+- &U for Check URL menu
+
+(1.0t 9.9.1999)
+- corrected /./ bug
+- added CTRL-B to switch between views
+
+(1.0s 12.8.1999)
+- "normalizing" received URLs. Advantage: hostnames always converted
+  into lower case.
+- considering all pending URLs with the same host as failed when
+  timeout, connection failed, or similar
+- moved the "Browse..." button
+- changed the URL combining method, now using Microsoft's
+  InternetCombineURL() instead of my own algorithm
+- proxy authentication now supported
+- corrected bug with '
+
+(1.0r 29.5.1999)
+- Corrected bug with image maps
+
+(1.0q 29.5.1999)
+- include titles of links
+- include / exclude
+- allowing the use of '
+- corrected bug re: e.g. "src" being used *before* the actual "src" word
+- new tags: link, script (the applet tag will come in a later version)
+- removed empty <ul></ul> sequences in the report
+- date in the title of the report
+- corrected bug re: HTML pages with CR only
+- set "text/html" for local files
+- save size of columns
+
+(1.0p 8.1.1999)
+- corrected bug about URL-in-URL
+- convert &amp; when in URLs
+- REFRESH META Tag
+- Focus set to OK after entering local file
+- remote URLs with "\" now always fail (because netscape cannot handle them)
+
+13.10.1998 (1.0o)
+- corrected bug that prevented checking local files with a space in it
+- corrected bug that thread count was not updated when finished
+- corrected bug that ignored  http:/host/directory  error
+- added banners
+
+If anyone has locations that offer banners, please e-mail me. 
+I would advertise for non-profit organisations that deal with 
+human rights or environmental topics. Attention - I will only 
+use banners that I like, and link to organisations that I like.
+
+5.9.1998 (1.0n)
+- Can check local files - useful for people who don't want to install
+  a local WWW server; simplified toolbar / initial window
+- "Check External" in INI file for new windows
+- "Show Broken Links Only" in INI for new windows
+- Corrected "//" bug for www.workstation.digital.com
+- Added random seed for banner (actually, uploaded this already on 17.7)
+- included HTML file in the ZIP file
+- RegisterShellFileTypes(FALSE)  to prevent the "new" and "print" 
+  in the registry for new users
+- Errors between 1 and 199 are also "errors"
+- maximize MDI child when opening
+- Randomize checking, so that there is less volume on just one host
+  (reduces peak volume on the ISP who hosts the site being checked)
+- Slight change in report because of OPERA bug with <PRE> after <H2>
+
+16.7.1998 (1.0m)
+- Added banners in report
+- corrected the "406" bug
+
+24.6.1998 (1.0l)
+- Added a column at the right (error text).
+- removed "DELETE_ON_CLOSE" technique, didn't work on Windows NT
+  due to different OS behaviour. Sorry!
+
+5.6.1998 (1.0k)
+- Changed ftp access completely. It is now reliable, but won't work with proxies.
+- more than 32767 URLs
+- Optimized HTML parser
+
+18.4.1998 (1.0j)
+(I was on vacation, and I am still behind in my other activities,
+ so no "big" new feature this time)
+- no need to enter "http://" in the NEW dialog box
+- Cool Xenu icon! See on the page above.
+- CTRL-R for "retry broken links"
+- Removed "search" from context menu (nothing was associated with it)
+
+6.2.1998 (1.0i)
+- URL launch should now work properly with Netscape Communicator
+
+1.2.1998 (1.0h)
+- added "export to TAB separated file" for Excel (for Marc)
+- added max level
+- 100% CPU usage problem solved (Miguelito) / changed idle processing
+- Site Map
+- URL launching improved (but still not perfect)
+
+25.12.1997 (also 1.0g)
+- corrected "%26" endless loop bug (Electronic Telegraph)
+
+24.12.1997 (1.0g)
+- added lots of new options (for Stu)
+  - chose what you want to have in the report
+  - chose to "fail" passworded sites
+- changed the way that URLs are launched: now with DDE so that only 
+  one instance (but another window) of Netscape comes up. Behaviour 
+  with IE and Opera might be different
+- corrected "text/html;...." bug (for Hanno)
+- you can now launch URLs with ENTER
+- you can now get the property box with ALT-ENTER
+- force reload for every call --> INTERNET_FLAG_RELOAD (for Doug)
+- changed initial dialog box, after two users didn't realize that one 
+  has to input only one URL, and not every page of the site
+- removed unused toolbar icons and menu elements
+
+23.11.1997 (1.0f)
+- corrected bug that made it difficult to check local or very fast sites
+- corrected minor bug in Properties Dialog
+- Added column with link level
+- Added error message for wrong input
+- Added different tries for image maps
+
+12.10.1997 (1.0e)
+- list of redirected URLs (useful because certain ISPs, e.g. www.primenet.com do not provide proper error returns, instead they redirect to an error page)
+- checking of targets of redirected URLs (this often leads to more broken links, as lots of sites make automatic redirection without checking if the target site exists)
+- ftp & gopher list for manual check
+- added tips how to repair broken links in the FAQ
+- retry mechanism enhanced (for sites that fail with the HEAD command)
+- error handler improved (open file problem)
+- status line accuracy improved
+
+7.9.1997 (1.0d)
+- "Find" dialog box
+- # of threads can be configured (watch your TCP/IP line glow!)
+- corrected bug related to titles that do not end
+- added authorization for "simple" password sites (HTTP error 401)
+  (will not work with web-based passwords, e.g. NY Times)
+
+24.8.1997 (1.0c)
+- HTML report, so that you can view with your browser
+- % of checked URLs in the status bar
+- URL list to chose from in "new" dialog box
+- Automatic retry with GET when certain conditions are
+  met that suggest that the server cannot process the HEAD 
+  command (www.amazon.com , www.wildkidz.com, www.dejanews.com )
+- corrected display bug in "Reset Item" feature
+- corrected bug when http:// in the middle of an URL
+  (www.sueddeutsche.de used this)
+- corrected bug that incorrectly processed URLs that started 
+  with a space
+- corrected bug when saving while busy, that made reloading crash
+
+15.8.1997 (1.0b)
+- <BASE HREF="url"> now handled correctly  (www.trancenet.org used it)
+- "Reset Item" feature to recheck a single broken URL
+- Automatic saving of window placement in INI file
+- Error msg when trying to check non-http/https sites
+- Reports are deleted when the next report is made
+  (*** Please go to your temp directory and delete all the TGH*.* files)
+- "Scroll bug" found and removed!
+- Now possibility to check your bookmark file
+- found column click bug, corrected, implemented time sorting
+- New column: server.
+- New column: title.
+- Properties Dialog Box
+
+10.8.1997
+- ability to save & restore
+- complete list of URLs (good to submit to a search engine)
+- new icons
+- # of threads in status line
+- correct size of dynamic html files
+- "copy" and "launch URL" function in menu and popup menu
+- launch report all the time
