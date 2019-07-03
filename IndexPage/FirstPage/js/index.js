@@ -1,13 +1,12 @@
 /*
 * @Author: 凛冬
 * @Date:   2019-02-14
- * @Last Modified by: 凛ドン
- * @Last Modified time: 2019-03-27 19:58:56
+ * @Last Modified by: YukiMuraRindon
+ * @Last Modified time: 2019-07-03 18:06:35
 */
 var Header = {
     data() {
       return {
-        activeIndex: '1',
       };
     },
     methods: {
@@ -18,27 +17,93 @@ var Search = {
       return {
         form: {
           dbs: [{
+            value : '2w5huji',
+            label : '部分户籍' 
+          },{
+            value : '7k7kGames',
+            label : '7k7k游戏网'
+          },{
             value : '94im',
-            label : '94im' 
+            label : '94im'
           },{
             value : '106w',
-            label : '106w'
+            label : '未知来源-1'
+          },{
+            value : '163-1',
+            label : '网易163邮箱库1'
+          },{
+            value : '163-2',
+            label : '网易163邮箱库2'
+          },{
+            value : '178Games',
+            label : '178游戏网'
           },{
             value : '766Games',
-            label : '766游戏网'
+            label : '766游戏网' 
           },{
             value : 'Acfun',
-            label : 'Acfun'
+            label : 'Acfun老数据' 
+          },{
+            value : 'aipai',
+            label : '爱拍' 
+          },{
+            value : 'amazonCN',
+            label : '亚马逊中国' 
+          },{
+            value : 'DangdangNet',
+            label : '当当网' 
+          },{
+            value : 'duduniu-1',
+            label : '嘟嘟牛库1' 
+          },{
+            value : 'duduniu-2',
+            label : '嘟嘟牛库2' 
+          },{
+            value : 'fanke',
+            label : '凡客诚品' 
+          },{
+            value : 'gmail',
+            label : 'gmail' 
+          },{
+            value : 'ispeak',
+            label : 'IS语音' 
           },{
             value : 'Mumayi',
-            label : '木蚂蚁'
+            label : '木蚂蚁' 
           },{
             value : 'Renren',
-            label : '人人网'
+            label : '人人网' 
+          },{
+            value : 'telegram',
+            label : '第三方tg泄露' 
+          },{
+            value : 'tianya-1',
+            label : '天涯库1' 
           },{
             value : 'Unknown',
-            label : '未知杂数据'
-          }],
+            label : '未知来源-2' 
+          },{
+            value : 'unknown_members-1',
+            label : '未知来源-3' 
+          },{
+            value : 'unknown_members-2',
+            label : '未知来源-4' 
+          },{
+            value : 'unknown_members-3',
+            label : '未知来源-5' 
+          },{
+            value : 'unknown_members-4',
+            label : '未知来源-6' 
+          },{
+            value : 'unknown_members-5',
+            label : '未知来源-7' 
+          },{
+            value : 'unknown_members-6',
+            label : '未知来源-8' 
+          },{
+            value : 'xenforo-IPB',
+            label : 'xenforo-IPB' 
+          },],
           pwd: '',
           value:'',
           resultData:[],
