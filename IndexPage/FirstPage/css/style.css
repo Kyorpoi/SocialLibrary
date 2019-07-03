@@ -1,8 +1,8 @@
 /*
 * @Author: 凛冬
 * @Date:   2019-02-14
-* @Last Modified by:   凛冬
-* @Last Modified time: 2019-02-14
+ * @Last Modified by: YukiMuraRindon
+ * @Last Modified time: 2019-07-03 18:21:58
 */
 html{
 	min-width: 740px;
@@ -11,20 +11,17 @@ html{
 	height: 61px;
 	text-align: center;
 	background-color: #545c64;
+	float:center;
 	
 }
 #title{
 	color: #FFFFFF;
 	display: inline-block;
 	text-align: left;
-	float: left;
 	text-align: center;
 	padding-top: 15px;;
 	padding-left: 15px;
 	font-size: 20px;
-	width:190px;
-}
-#menu{
 	margin-left: auto;
 	margin-right: auto;
 	width: 740px;
@@ -34,6 +31,7 @@ html{
 	width: 700px;
 	padding-left: 205px;
 	padding-top: 20px;
+	float:center;
 }
 #Result{
 	width: 740px;
@@ -56,6 +54,7 @@ a{
 	bottom:0px;
 	left:0px;
 	width: 100%;
+	float: center;
 }
 a:link { 
 	color:#FFFFFF; 
