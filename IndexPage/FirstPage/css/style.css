@@ -2,7 +2,7 @@
 * @Author: 凛冬
 * @Date:   2019-02-14
  * @Last Modified by: YukiMuraRindon
- * @Last Modified time: 2019-07-03 18:21:58
+ * @Last Modified time: 2019-07-04 09:03:10
 */
 html{
 	min-width: 740px;
@@ -11,8 +11,12 @@ html{
 	height: 61px;
 	text-align: center;
 	background-color: #545c64;
-	float:center;
-	
+	min-width:740px;
+}
+#banner{
+	background-color: #545c64;
+	width: 740px;
+	height: 61px;
 }
 #title{
 	color: #FFFFFF;
@@ -28,7 +32,7 @@ html{
 	height: 61px;
 }
 #Search{
-	width: 700px;
+	width: 740px;
 	padding-left: 205px;
 	padding-top: 20px;
 	float:center;

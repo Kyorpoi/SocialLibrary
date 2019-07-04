@@ -2,7 +2,7 @@
 * @Author: 凛冬
 * @Date:   2019-02-14
  * @Last Modified by: YukiMuraRindon
- * @Last Modified time: 2019-07-03 18:06:35
+ * @Last Modified time: 2019-07-04 10:23:05
 */
 var Header = {
     data() {
@@ -107,7 +107,8 @@ var Search = {
           pwd: '',
           value:'',
           resultData:[],
-          loading: true
+          line:[],
+          allcol: []
         }
       }
     },
@@ -115,8 +116,25 @@ var Search = {
       pwd:function(val){
         this.form.pwd = val;
       }
+      //加一个观测器，点击数据库后获得列名，考虑加一个loading界面
+    },
+    mounted(){
+      this.initData();
     },
     methods: {
+      initData() {
+        //远程搜索机构
+        this.$http.post('http://192.168.23.128/index.php',{
+            TableName:this.form.value,
+          },{emulateJSON:true}).then(resp => {
+            //设置机构的选择项
+            this.form.allcol = resp.data;
+            console.dir(resp.data);
+            this.form.list = this.form.allcol.map(item => { //组装，只需要id和name
+                return {value: items.column_name};
+               });
+            });
+      },
       Submit() {
         //发送 post 请求进行精确查询
         //alert(this.form.pwd);
@@ -222,7 +240,7 @@ var Search = {
       prompt(){
         this.$notify.info({
           title: '提示',
-          message: '输入密码以寻找自己的用户名来查看自己的账户是否泄露。',
+          message: '先选择数据库，之后会出现可以查询的字段，选择字段后输入关键字点击查询即可',
           position: 'top-left'
         });
       }
