@@ -2,7 +2,7 @@
 * @Author: 凛冬
 * @Date:   2019-02-14
  * @Last Modified by: YukiMuraRindon
- * @Last Modified time: 2019-07-04 10:23:05
+ * @Last Modified time: 2019-07-05 11:09:36
 */
 var Header = {
     data() {
@@ -17,7 +17,7 @@ var Search = {
       return {
         form: {
           dbs: [{
-            value : '2w5huji',
+            value : '2w5Huji',
             label : '部分户籍' 
           },{
             value : '7k7kGames',
@@ -107,8 +107,7 @@ var Search = {
           pwd: '',
           value:'',
           resultData:[],
-          line:[],
-          allcol: []
+          line:'请选择'
         }
       }
     },
@@ -116,24 +115,18 @@ var Search = {
       pwd:function(val){
         this.form.pwd = val;
       }
-      //加一个观测器，点击数据库后获得列名，考虑加一个loading界面
-    },
-    mounted(){
-      this.initData();
     },
     methods: {
-      initData() {
-        //远程搜索机构
-        this.$http.post('http://192.168.23.128/index.php',{
-            TableName:this.form.value,
-          },{emulateJSON:true}).then(resp => {
-            //设置机构的选择项
-            this.form.allcol = resp.data;
-            console.dir(resp.data);
-            this.form.list = this.form.allcol.map(item => { //组装，只需要id和name
-                return {value: items.column_name};
-               });
-            });
+      selectChange(val){
+        //数据库下拉单的点击事件，实现动态字段
+        this.$http.get('http://192.168.23.128/index.php?TableName='+this.form.value,
+        {emulateJSON:true}).then(function(res){
+            this.form.line = res.body;
+          })
+          //console.log(this.form.line);
+      },
+      test(){
+        console.log(this.form.line+'\n'+this.form.value);
       },
       Submit() {
         //发送 post 请求进行精确查询
