@@ -2,7 +2,7 @@
 * @Author: 凛冬
 * @Date:   2019-02-14
  * @Last Modified by: YukiMuraRindon
- * @Last Modified time: 2019-07-05 11:09:36
+ * @Last Modified time: 2019-07-08 17:46:48
 */
 var Header = {
     data() {
@@ -107,7 +107,8 @@ var Search = {
           pwd: '',
           value:'',
           resultData:[],
-          line:'请选择'
+          line:'请选择',
+          col:''
         }
       }
     },
@@ -122,6 +123,7 @@ var Search = {
         this.$http.get('http://192.168.23.128/index.php?TableName='+this.form.value,
         {emulateJSON:true}).then(function(res){
             this.form.line = res.body;
+            this.form.col = res.body;
           })
           //console.log(this.form.line);
       },
@@ -132,12 +134,12 @@ var Search = {
         //发送 post 请求进行精确查询
         //alert(this.form.pwd);
         if(!this.form.pwd){
-          this.$alert('密码为空！', '未输入密码！', {
+          this.$alert('字段为空！', '未输入有效值！', {
             confirmButtonText: '确定',
             callback: action => {
               this.$message({
                 type: 'info',
-                message: '输入要查询的密码之后才可以进行查询'
+                message: '输入要查询的字段之后才可以进行查询'
               });
             }
           });
@@ -157,18 +159,16 @@ var Search = {
             this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
             Value:this.form.pwd,
-            CColName:'Password[=]',
-            Option:1
+            CColName:this.form.line+'[=]',
           },{emulateJSON:true}).then(function(res){
-            this.$http.get('http://192.168.23.128/data.json').then(res=>{
               this.form.resultData = res.body;
-            })
-          },function(res){
+            }),
+            function(res){
             this.$alert('请求数据错误','请联系管理员'),{
               confirmButtonText:'确定'
             }
               //console.log(res.status);
-          });
+          };
           //console.dir(this.form.pwd);
           //console.dir(this.form.value);
           //console.log('accurate!');
@@ -202,11 +202,9 @@ var Search = {
           this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
             Value:this.form.pwd,
-            CColName:'Password[~]',
-            Option:1
+            CColName:this.form.line+'[~]',
           },{emulateJSON:true}).then(function(res){
-            this.$http.get('http://192.168.23.128/data.json').then(res=>{
-              this.form.resultData = res.body;
+            this.form.resultData = res.body;
               //console.log(res);
               //console.log(this.form.resultData);
             })
@@ -215,10 +213,10 @@ var Search = {
               //console.log(this.form.result);
               //this.form.result=JSON.parse(this.form.result);
               //alert(typeof(this.form.result));
-          },function(res){
+              ,function(res){
             alert('数据请求出错，请稍后再试');
             //console.log(res.status);
-          }); 
+          }; 
         }
         //console.dir(this.form.pwd);
         //console.dir(this.form.value);

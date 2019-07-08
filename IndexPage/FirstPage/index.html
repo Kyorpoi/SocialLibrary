@@ -78,14 +78,12 @@
         height="580" 
         border 
         style="width: 100%">
-          <el-table-column 
-            prop="Username" 
-            label="用户名" 
-            width="180">
-          </el-table-column>
-          <el-table-column 
-          prop="Password" 
-          label="密码">
+          <el-table-column
+            v-for="item in form.col"
+              :key="item.column_name"
+              :label="item.column_name"
+              :value="item.column_name"
+              :prop="item.column_name">  
           </el-table-column>
       </el-table>
     </template>
