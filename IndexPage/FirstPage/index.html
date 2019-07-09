@@ -46,7 +46,7 @@
             <el-form-item label="字段">
                 <template>
                   <el-select 
-                    v-model="form.line" 
+                    v-model="form.colvalue" 
                     value-key="column_name" 
                     placeholder="请选择"
                     remote>
@@ -69,13 +69,12 @@
       <el-button type="primary" @click="doReset">重置</el-button>
       <el-button type="primary" @click="md5Encode()">md5加密</el-button>
       <el-button type="primary" @click="prompt()">提示</el-button>
-      <el-button type="primary" @click="test()">测试</el-button>
     </el-form-item>
   </el-form>
     <template>
       <el-table 
-        :data="form.resultData" 
-        height="580" 
+        :data="form.resultData"  
+        height="550px"
         border 
         style="width: 100%">
           <el-table-column

@@ -2,7 +2,7 @@
 * @Author: 凛冬
 * @Date:   2019-02-14
  * @Last Modified by: YukiMuraRindon
- * @Last Modified time: 2019-07-08 17:46:48
+ * @Last Modified time: 2019-07-09 13:44:38
 */
 var Header = {
     data() {
@@ -108,7 +108,8 @@ var Search = {
           value:'',
           resultData:[],
           line:'请选择',
-          col:''
+          col:'',
+          colvalue:''
         }
       }
     },
@@ -126,9 +127,6 @@ var Search = {
             this.form.col = res.body;
           })
           //console.log(this.form.line);
-      },
-      test(){
-        console.log(this.form.line+'\n'+this.form.value);
       },
       Submit() {
         //发送 post 请求进行精确查询
@@ -159,7 +157,7 @@ var Search = {
             this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
             Value:this.form.pwd,
-            CColName:this.form.line+'[=]',
+            CColName:this.form.colvalue+'[=]',
           },{emulateJSON:true}).then(function(res){
               this.form.resultData = res.body;
             }),
@@ -202,7 +200,7 @@ var Search = {
           this.$http.post('http://192.168.23.128/Search.php',{
             TableName:this.form.value,
             Value:this.form.pwd,
-            CColName:this.form.line+'[~]',
+            CColName:this.form.colvalue+'[~]',
           },{emulateJSON:true}).then(function(res){
             this.form.resultData = res.body;
               //console.log(res);
